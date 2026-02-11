@@ -33,4 +33,19 @@
  */
 export function calculateAutoFare(distance, waitingMinutes = 0) {
   // Your code here
+  if(!distance || typeof distance !== "number" || isNaN(distance) || distance <= 0) return -1;
+  if(typeof waitingMinutes !== "number" || waitingMinutes < 0) return -1;
+
+  const waitingCharges = Math.ceil(waitingMinutes/2) * 5;
+  
+  distance = Math.ceil(distance);
+
+  let price = 30;
+  if(distance <= 5)
+    price += (distance - 1) * 15;
+  if(distance > 5)
+    price += (distance - 5) * 10 + 4 * 15;
+
+  return price + waitingCharges;
+
 }
